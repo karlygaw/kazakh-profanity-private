@@ -22,7 +22,7 @@ The input is a single comment or sentence, and the output is a binary label alon
 
 ### Source and Context
 
-The model was trained using a curated version of the **Kaz-Cassandra** dataset. While the original dataset covers general web text, it contains conversational and opinion-based language highly representative of Kazakh product reviews and user comments.
+The model was trained using a curated version of the [**Kaz-Cassandra**](https://huggingface.co/datasets/issai/kazsandra) dataset. While the original dataset covers general**** web text, it contains conversational and opinion-based language highly representative of Kazakh product reviews and user comments.
 
 ### Labeling Rules
 
@@ -121,18 +121,17 @@ pip install -q transformers==5.22.1 torch huggingface_hub
 * **Random Seed used for training:** `42`
 * **Training Settings:** Epochs: 3, Batch Size: 32, Learning Rate: 2e-5
 
-### 2. Training the Model
+### 2. Project Pipeline (Notebooks)
 
-To reproduce the data preparation and training process, run the Jupyter Notebook in Google Colab or locally:
+To reproduce the entire pipeline from scratch, the repository is split into 3 core Jupyter Notebooks. Run them sequentially in Google Colab or your local environment:
 
-```bash
-jupyter notebook notebooks/01_train_model.ipynb
-
-```
+1. **`01_Data.ipynb`**: Handles dataset loading, cleaning, PII masking, and creating the train/validation/test splits.
+2. **`02_Training.ipynb`**: Contains the code for fine-tuning the XLM-Roberta model using the prepared data.
+3. **`03_Inference.ipynb`**: Handles test set evaluation (confusion matrix, metrics) and includes the inference pipeline for testing new strings.
 
 ### 3. Predicting on Custom Text (Inference)
 
-You can load the saved model and tokenizer directly from Hugging Face without retraining. The code below automatically handles the necessary PII masking.
+You can run predictions directly using `03_Inference.ipynb`, or load the saved model and tokenizer directly from Hugging Face anywhere using the snippet below. The code automatically handles the necessary PII masking.
 
 ```python
 import torch
@@ -170,9 +169,10 @@ review = "piiiiii$$$$daaa, қайтадан қате шықты"
 print(predict(review)) 
 # Output: {'label': 1, 'probability': 0.798}
 
+
 ```
 
 ## 🤝 Acknowledgements
 
 * **AI Tools:** AI tools Gemini and ChatGPT were used to assist in generating boilerplate PyTorch inference code, and debugging regular expressions for PII masking. The data curation, architectural decisions, hyperparameter tuning, and error analysis are my own original contributions.
-* **Dataset:** Original raw data sourced from Kaz-Cassandra.
+* **Dataset:** Original raw data sourced from [**Kaz-Cassandra**](https://huggingface.co/datasets/issai/kazsandra).
