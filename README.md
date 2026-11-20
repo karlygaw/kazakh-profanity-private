@@ -86,15 +86,15 @@ The model was evaluated once on the held-out test set after selecting hyperparam
 
 Here are 3 challenging examples where the model made mistakes based on the validation data:
 
-1. **"ШЕШЕН СЫГИЫНДЕР ! ЖАНА ЖУМЫСТАН КЕЛIП... НАМАЗ ОКЫП ТУРГАНДА..."**
+1. **"Ш****Н С*****Р ! ЖАНА ЖУМЫСТАН КЕЛIП... НАМАЗ ОКЫП ТУРГАНДА..."**
 
 * *Actual: 1 (Profane), Predicted: 0 (Safe).*
-* **Reason:** The text contains a heavily misspelled Kazakh swear word ("СЫГИЫНДЕР"), but the rest of the long comment is filled with religious and everyday words ("НАМАЗ", "ЖУМЫСТАН"). The safe context completely overwhelmed the obfuscated profanity, causing a False Negative.
+* **Reason:** The text contains a heavily misspelled Kazakh swear word ("С****Р"), but the rest of the long comment is filled with religious and everyday words ("НАМАЗ", "ЖУМЫСТАН"). The safe context completely overwhelmed the obfuscated profanity, causing a False Negative.
 
-2. **"Сыныптастан келдым нехуя екен приложения"**
+2. **"Сыныптастан келдым н*****я екен приложения"**
 
 * *Actual: 1 (Profane), Predicted: 0 (Safe).*
-* **Reason:** Code-switching and grammar issues. A Russian swear word ("нехуя") is embedded directly into a Kazakh sentence. Because of the informal spelling and lack of punctuation, the multilingual tokenizer likely split the word in a way that didn't trigger the profanity classification.
+* **Reason:** Code-switching and grammar issues. A Russian swear word ("н***я") is embedded directly into a Kazakh sentence. Because of the informal spelling and lack of punctuation, the multilingual tokenizer likely split the word in a way that didn't trigger the profanity classification.
 
 3. **"Каиф оин ғой каиф"**
 <img width="959" height="529" alt="image" src="https://github.com/user-attachments/assets/b8f81c59-1a8e-40bf-b805-4ff151d82226" />
