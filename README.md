@@ -1,107 +1,127 @@
-Here is the completely revised `README.md` in English, strictly following all the requirements from the "DSSC5113_Bonus_Project_Kazakh_Profanity_Detection (1)_2.pdf" rubric. It now includes the detailed dataset splits, labeling rules, error analysis, AI tool acknowledgments, and everything else specified in the assignment.
+# Kazakh Profanity Detection in Product Reviews 🇰🇿
 
-Just fill in the bracketed placeholders (like `[INSERT NUMBER]`) with your exact project metrics before submitting.
+This repository contains a fine-tuned sequence classification model designed to read Kazakh product reviews or comments and predict whether they contain profanity.
 
-# Kazakh Profanity Detection in Product Reviews 🤬🇰🇿
+## 🚀 Live Demo & Model Access
+
+* **Interactive Demo (Gradio):** [KazProSpace](https://huggingface.co/spaces/karlygaw/KazProSpace)
+* **Trained Model & Tokenizer:** [karlygaw/kazakh-profanity-xlmr](https://huggingface.co/karlygaw/kazakh-profanity-xlmr/)
+
+---
 
 ## 📌 Task Definition
-This repository contains a trained sequence classification model designed to read Kazakh product reviews or comments and predict whether they contain profanity[cite: 10]. 
 
-The input is a single comment or sentence, and the output is a binary label alongside a probability score[cite: 10]:
+The input is a single comment or sentence, and the output is a binary label alongside a probability score:
+
 * `0` = No Kazakh profanity (Safe)
 * `1` = Kazakh profanity present (Toxic / Obscene)
-
-**Live Demo:** [Link to your Hugging Face Space / Gradio]
-**Model Weights:** [Link to your Hugging Face Model]
 
 ---
 
 ## 📊 Dataset & Labeling
 
 ### Source and Context
-The model was trained using a curated version of the **Kaz-Cassandra** dataset. While the original dataset covers general web text, it contains conversational and opinion-based language highly representative of Kazakh product reviews and user comments[cite: 10]. 
+
+The model was trained using a curated version of the **Kaz-Cassandra** dataset. While the original dataset covers general web text, it contains conversational and opinion-based language highly representative of Kazakh product reviews and user comments.
 
 ### Labeling Rules
-The dataset was labeled according to the following strict criteria[cite: 10]:
+
+The dataset was strictly labeled according to the following criteria:
+
 * **Profanity (`1`):** Contains explicit swear words, heavily obscene slang, or toxic insults.
-* **Safe (`0`):** Standard text, positive reviews, and **negative reviews without swear words**. A review stating "Бұл тауар өте нашар, сынған" (This product is very bad, broken) is labeled `0` because negative sentiment is not automatically profane[cite: 10].
-* **Mixed-Language:** Comments containing Russian profanity mixed with Kazakh text (a common phenomenon in Kazakh internet slang) are labeled `1`[cite: 10].
-* **Masked/Misspelled Words:** Obfuscated profanity (e.g., `p***da`, `ш#&с`) or common spelling variations were actively labeled as `1`[cite: 10]. 
+* **Safe (`0`):** Standard text, positive reviews, and **negative reviews without swear words**. A review stating "Бұл тауар өте нашар, сынған" (This product is very bad, broken) is labeled `0` because negative sentiment is not automatically profane.
+* **Mixed-Language:** Comments containing Russian profanity mixed with Kazakh text (a common phenomenon in Kazakh internet slang) are labeled `1`.
+* **Masked/Misspelled Words:** Obfuscated profanity (e.g., `p***da`, `ш#&с`) or common spelling variations were actively labeled as `1`.
 
 ### Data Splits & Preprocessing
-To prevent data leakage, duplicates were removed, and near-duplicates were kept in the same split[cite: 10]. PII (reviewer names, emails, phones) was masked out of the repository[cite: 10].
-* **Total Samples:** [INSERT TOTAL NUMBER]
-* **Train:** [INSERT NUMBER] samples (class distribution: [X]% safe, [Y]% profane)
-* **Validation:** [INSERT NUMBER] samples
-* **Test:** [INSERT NUMBER] samples
-* **Random Seed:** `42`[cite: 10]
 
-**Labeled Examples:**[cite: 10]
+To prevent data leakage, duplicates were removed, and near-duplicates were kept in the same split. **PII (Personally Identifiable Information)** was masked out of the training data and repository to protect reviewer privacy. Links, emails, phone numbers, and social media handles are replaced with special tokens (`<URL>`, `<EMAIL>`, `<PHONE>`, `<USER>`).
+
+* **Total Samples:** 6,728
+* **Train Set:** 4,714 samples (class distribution: ~66.6% safe, ~33.4% profane)
+* **Validation Set:** 1,015 samples
+* **Test Set:** 999 samples
+* **Random Seed:** `42`
+
+**Labeled Examples:**
+
 1. `Өте жақсы қосымша, маған ұнады` -> `0` (Positive, Safe)
 2. `Тауар уақытында келмеді, сапасы нашар!` -> `0` (Negative, but Safe)
-3. `Мынау не п****ц, мүлдем істемейді ғой` -> `1` (Profanity present, masked)
+3. `piiiiii$$$$daaa, қайтадан қате шықты` -> `1` (Profanity present, masked)
 
 ---
 
 ## 🧠 Model Choice & Architecture
 
-I chose to fine-tune **XLM-Roberta (XLM-R)** for this classification task. 
-* **Why this model?** XLM-R is a highly effective multilingual model. Since Kazakh online reviews frequently feature a mix of Kazakh and Russian (code-switching), a robust multilingual tokenizer is strictly required[cite: 10].
-* **Input Handling:** Text is tokenized using the pretrained XLM-R SentencePiece tokenizer, which handles unknown words via subword tokenization[cite: 10]. Punctuation is retained as it often correlates with aggressive/toxic sentiment.
-* **Long Comments:** Inputs are truncated to a maximum length of 128 tokens[cite: 10]. Product reviews rarely exceed this length, and profanity usually appears early in the text.
+I chose to fine-tune **XLM-Roberta (XLM-R)** for this classification task.
+
+* **Why this model?** XLM-R is a highly effective multilingual model. Since Kazakh online reviews frequently feature a mix of Kazakh and Russian (code-switching), a robust multilingual tokenizer is required.
+* **Input Handling:** Text is tokenized using the pretrained XLM-R SentencePiece tokenizer, which handles unknown words via subword tokenization. Punctuation is retained as it often correlates with aggressive sentiment.
+* **Long Comments:** Inputs are truncated to a maximum length of `128` tokens. Product reviews rarely exceed this length, and profanity usually appears early in the text.
 
 ---
 
 ## 📈 Evaluation & Results
 
-The model was evaluated once on the held-out test set after selecting hyperparameters using the validation data[cite: 10].
+The model was evaluated once on the held-out test set after selecting hyperparameters using the validation data.
 
-### Test Metrics[cite: 10]
-* **Test Set Size:** [INSERT NUMBER] examples
-* **Precision (Class 1):** [INSERT SCORE]
-* **Recall (Class 1):** [INSERT SCORE]
-* **F1-Score (Class 1):** [INSERT SCORE]
+### Test Metrics
 
-### Confusion Matrix[cite: 10]
-|                | Predicted: Safe (0) | Predicted: Profane (1) |
-|----------------|----------------------|------------------------|
-| **Actual: 0**  | True Negatives: [X]  | False Positives: [X]   |
-| **Actual: 1**  | False Negatives: [X] | True Positives: [X]    |
+* **Test Set Size:** 999 examples
+* **Precision (Class 1):** 0.945
+* **Recall (Class 1):** 0.928
+* **F1-Score (Class 1):** 0.936
 
-### Business Context: False Positives vs. False Negatives[cite: 10]
+### Confusion Matrix
+
+|  | Predicted: Safe (0) | Predicted: Profane (1) |
+| --- | --- | --- |
+| **Actual: 0** | True Negatives: 648 | False Positives: 18 |
+| **Actual: 1** | False Negatives: 24 | True Positives: 309 |
+
+### Business Context: False Positives vs. False Negatives
+
 * **False Positive (FP):** A clean review is flagged as profane and hidden from the store. This frustrates normal users and suppresses valid product feedback.
-* **False Negative (FN):** A profane review slips through and is displayed publicly. This damages the platform's reputation. 
-* *Conclusion:* For product moderation, minimizing False Positives (high precision) is often prioritized so legitimate customer complaints aren't censored.
+* **False Negative (FN):** A profane review slips through and is displayed publicly. This damages the platform's reputation.
+* *Conclusion:* For product moderation, minimizing False Positives (high precision) is often prioritized so legitimate customer complaints aren't unfairly censored.
 
-### Error Analysis & Limitations[cite: 10]
-Here are 3 challenging examples where the model made mistakes:
-1. **[INSERT TEXT OF MISTAKE 1]** - *Actual: [X], Predicted: [Y].* **Reason:** [Explain why, e.g., sarcasm or an unknown slang word].
-2. **[INSERT TEXT OF MISTAKE 2]** - *Actual: [X], Predicted: [Y].* **Reason:** [Explain why, e.g., heavily masked word that the tokenizer split poorly].
-3. **[INSERT TEXT OF MISTAKE 3]** - *Actual: [X], Predicted: [Y].* **Reason:** [Explain why, e.g., context-dependent word that is normal in biology but offensive in slang].
-* **Suggested Improvement:** [e.g., Augment the training data with more diverse masked profanity or apply a spell-checker pipeline before inference][cite: 10].
+### Error Analysis & Limitations
+
+Here are 3 challenging examples where the model made mistakes based on the validation data:
+
+1. **"ШЕШЕН СЫГИЫНДЕР ! ЖАНА ЖУМЫСТАН КЕЛIП... НАМАЗ ОКЫП ТУРГАНДА..."**
+
+* *Actual: 1 (Profane), Predicted: 0 (Safe).*
+* **Reason:** The text contains a heavily misspelled Kazakh swear word ("СЫГИЫНДЕР"), but the rest of the long comment is filled with religious and everyday words ("НАМАЗ", "ЖУМЫСТАН"). The safe context completely overwhelmed the obfuscated profanity, causing a False Negative.
+
+2. **"Сыныптастан келдым нехуя екен приложения"**
+
+* *Actual: 1 (Profane), Predicted: 0 (Safe).*
+* **Reason:** Code-switching and grammar issues. A Russian swear word ("нехуя") is embedded directly into a Kazakh sentence. Because of the informal spelling and lack of punctuation, the multilingual tokenizer likely split the word in a way that didn't trigger the profanity classification.
+
+3. **"Каиф оин ғой каиф"**
+
+* *Actual: 0 (Safe), Predicted: 1 (Profane).*
+* **Reason:** The user is expressing a positive emotion using street slang ("Каиф" / Kaif). While not a swear word, such slang frequently appears in toxic or highly informal internet datasets, leading the model to over-index on the slang and trigger a False Positive.
+* **Suggested Improvement:** Augment the training data with more diverse masked/misspelled profanity (especially code-switched Russian-Kazakh slang) and ensure safe street slang (like "кайф", "сила") is well-represented in the positive class to reduce False Positives.
 
 ---
 
 ## 💻 Reproducibility & Setup
 
-### 1. Dependencies & Configuration[cite: 11]
-Ensure you have the following installed (tested on Python 3.10+):
+### 1. Dependencies & Configuration
+
+Ensure you have the following installed:
+
 ```bash
-pip install -r requirements.txt
-# requirements.txt contains: transformers==5.22.1, torch, scikit-learn, pandas
+pip install -q transformers==5.22.1 torch huggingface_hub
 
 ```
 
 * **Random Seed used for training:** `42`
-
-
-* **Training Settings:** [Epochs: 3, Batch Size: 16, Learning Rate: 2e-5]
-
-
+* **Training Settings:** Epochs: 3, Batch Size: 32, Learning Rate: 2e-5
 
 ### 2. Training the Model
-
-
 
 To reproduce the data preparation and training process, run the Jupyter Notebook in Google Colab or locally:
 
@@ -110,44 +130,49 @@ jupyter notebook notebooks/01_train_model.ipynb
 
 ```
 
-*(Clear setup instructions and data access links are provided inside the notebook).*
-
 ### 3. Predicting on Custom Text (Inference)
 
+You can load the saved model and tokenizer directly from Hugging Face without retraining. The code below automatically handles the necessary PII masking.
 
-
-You can load the saved model and tokenizer without retraining to test new Kazakh reviews:
-
+```python
 import torch
+import re
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-# Load model and tokenizer (downloads automatically from Hugging Face)
-model_id = "karlygaw/kazakh-profanity-xlmr"
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForSequenceClassification.from_pretrained(model_id)
+MODEL_ID = "karlygaw/kazakh-profanity-xlmr"
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
-def predict_profanity(text):
-    inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=128)
-    with torch.no_grad():
-        logits = model(**inputs).logits
-        prob = torch.softmax(logits, dim=-1)[0, 1].item()
+def mask_pii(text):
+    """Applies the same personal-data masking used during training."""
+    text = re.sub(r"https?://\S+|www\.\S+", "<URL>", text)
+    text = re.sub(r"\S+@\S+\.\S+", "<EMAIL>", text)
+    text = re.sub(r"@\w+", "<USER>", text)
+    return re.sub(r"\+?\d[\d\-\s\(\)]{8,}\d", "<PHONE>", text)
+
+# Load model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_ID).to(device).eval()
+
+def predict(text):
+    masked_text = mask_pii(str(text)).strip()
+    inputs = tokenizer(masked_text, truncation=True, max_length=128, return_tensors="pt").to(device)
     
-    label = 1 if prob >= 0.5 else 0
-    return {"label": label, "probability": round(prob, 4)}
+    with torch.no_grad():
+        prob = torch.softmax(model(**inputs).logits, dim=-1)[0, 1].item()
+        
+    return {
+        "label": 1 if prob >= 0.7 else 0, 
+        "probability": round(prob, 3)
+    }
 
-# Test it yourself
-review = "Бұл тауар маған ұнамады, сапасы нашар."
-print(predict_profanity(review)) 
-# Output: {'label': 0, 'probability': 0.0031}
+# Test it
+review = "piiiiii$$$$daaa, қайтадан қате шықты"
+print(predict(review)) 
+# Output: {'label': 1, 'probability': 0.798}
 
-
-
----
+```
 
 ## 🤝 Acknowledgements
 
-* **AI Tools:** AI tools (ChatGPT/Claude) were used to assist in formatting this README, generating boilerplate PyTorch training loops, and debugging regular expressions for data preprocessing. The data curation, architectural decisions, hyperparameter tuning, and error analysis are my own original contributions.
-
-
-* **Dataset:** Original data sourced from Kaz-Cassandra.
-
+* **AI Tools:** AI tools Gemini and ChatGPT were used to assist in generating boilerplate PyTorch inference code, and debugging regular expressions for PII masking. The data curation, architectural decisions, hyperparameter tuning, and error analysis are my own original contributions.
+* **Dataset:** Original raw data sourced from Kaz-Cassandra.
