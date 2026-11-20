@@ -47,7 +47,7 @@ To prevent data leakage, duplicates were removed, and near-duplicates were kept 
 
 1. `Өте жақсы қосымша, маған ұнады` -> `0` (Positive, Safe)
 2. `Тауар уақытында келмеді, сапасы нашар!` -> `0` (Negative, but Safe)
-3. `piiiiii$$$$daaa, қайтадан қате шықты` -> `1` (Profanity present, masked)
+3. `p********aaa, қайтадан қате шықты` -> `1` (Profanity present, masked)
 
 ---
 
