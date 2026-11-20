@@ -22,7 +22,7 @@ The input is a single comment or sentence, and the output is a binary label alon
 
 ### Source and Context
 
-The model was trained using a curated version of the [**Kaz-Cassandra**](https://huggingface.co/datasets/issai/kazsandra) dataset. While the original dataset covers general**** web text, it contains conversational and opinion-based language highly representative of Kazakh product reviews and user comments.
+The model was trained using a curated version of the [KazSAnDRA: Kazakh Sentiment Analysis Dataset of Reviews and Attitudes](https://aclanthology.org/2024.lrec-main.844/) (Yeshpanov & Varol, LREC-COLING 2024)  [**Kaz-Cassandra Dataset from Hugging Face**](https://huggingface.co/datasets/issai/kazsandra) dataset. While the original dataset covers general**** web text, it contains conversational and opinion-based language highly representative of Kazakh product reviews and user comments.
 
 ### Labeling Rules
 
@@ -173,4 +173,4 @@ print(predict(review))
 ## 🤝 Acknowledgements
 
 * **AI Tools:** AI tools Gemini and ChatGPT were used to assist in generating boilerplate PyTorch inference code, and debugging regular expressions for PII masking. The data curation, architectural decisions, hyperparameter tuning, and error analysis are my own original contributions.
-* **Dataset:** Original raw data sourced from [**Kaz-Cassandra**](https://huggingface.co/datasets/issai/kazsandra).
+* **Dataset:** Original raw data sourced from [KazSAnDRA: Kazakh Sentiment Analysis Dataset of Reviews and Attitudes](https://aclanthology.org/2024.lrec-main.844/) (Yeshpanov & Varol, LREC-COLING 2024).
