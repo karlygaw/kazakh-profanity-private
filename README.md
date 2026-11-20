@@ -74,10 +74,7 @@ The model was evaluated once on the held-out test set after selecting hyperparam
 
 ### Confusion Matrix
 
-|  | Predicted: Safe (0) | Predicted: Profane (1) |
-| --- | --- | --- |
-| **Actual: 0** | True Negatives: 648 | False Positives: 18 |
-| **Actual: 1** | False Negatives: 24 | True Positives: 309 |
+<img width="499" height="388" alt="image" src="https://github.com/user-attachments/assets/45b34186-029e-4828-9385-e37dec0981c0" />
 
 ### Business Context: False Positives vs. False Negatives
 
@@ -100,6 +97,7 @@ Here are 3 challenging examples where the model made mistakes based on the valid
 * **Reason:** Code-switching and grammar issues. A Russian swear word ("нехуя") is embedded directly into a Kazakh sentence. Because of the informal spelling and lack of punctuation, the multilingual tokenizer likely split the word in a way that didn't trigger the profanity classification.
 
 3. **"Каиф оин ғой каиф"**
+<img width="959" height="529" alt="image" src="https://github.com/user-attachments/assets/b8f81c59-1a8e-40bf-b805-4ff151d82226" />
 
 * *Actual: 0 (Safe), Predicted: 1 (Profane).*
 * **Reason:** The user is expressing a positive emotion using street slang ("Каиф" / Kaif). While not a swear word, such slang frequently appears in toxic or highly informal internet datasets, leading the model to over-index on the slang and trigger a False Positive.
