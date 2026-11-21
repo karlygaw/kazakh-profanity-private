@@ -1,7 +1,15 @@
-# results/
+# data/
 
-Results of the published model (test set, n = 999, threshold 0.70):
+`split_ids.csv` lists every example of the final dataset (6,728 rows) with its split and labels, **without review text** (KazSAnDRA is a gated dataset).
 
-- `test_metrics.json`: precision, recall, F1, confusion matrix, recall by profanity type
-- `confusion_matrix.png`: confusion matrix figure
-- `test_predictions.csv`: probability and prediction for every test example (no review text)
+| Column | Meaning |
+|---|---|
+| `custom_id` | review id in KazSAnDRA |
+| `split` | `train`, `val` or `test` |
+| `is_profane` | label: 1 = profanity present, 0 = none |
+| `profanity_type` | `kazakh`, `russian`, `mixed` (positives) or `none` |
+| `domain` | `appstore`, `market`, `bookstore`, `mapping` |
+| `rating` | original 1-5 star rating (sentiment, not the profanity label) |
+| `is_synthetic` | always 0: there are no synthetic examples |
+
+To rebuild the texts, get access to [`issai/kazsandra`](https://huggingface.co/datasets/issai/kazsandra) and run `notebooks/01_data_preparation.ipynb`.
