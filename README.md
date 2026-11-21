@@ -2,7 +2,7 @@
 
 Binary classifier that reads one Kazakh product/app review (or any short comment) and predicts whether it contains **Kazakh profanity**: `0` = no profanity, `1` = profanity present. A fine-tuned **XLM-RoBERTa-base** outputs a label and the probability of the profanity class.
 
-**Author:** Karlygash Ussen · **Student ID:** `<fill in>` · KBTU, DSSC5113 Algorithms of Computer Vision, bonus project (individual work)
+**Author:** Karlygash Ussen · KBTU, DSSC5113 Algorithms of Computer Vision, bonus project (individual work)
 
 | | |
 |---|---|
