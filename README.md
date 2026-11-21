@@ -10,7 +10,7 @@ Binary classifier that reads one Kazakh product/app review (or any short comment
 | Live demo (Gradio Space) | https://huggingface.co/spaces/karlygaw/KazProSpace |
 | Dataset source | [`issai/kazsandra`](https://huggingface.co/datasets/issai/kazsandra) (gated, CC BY 4.0) |
 
-Notebooks (open in Colab):
+Notebooks :
 [01 data preparation](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/01_data_preparation.ipynb) ·
 [02 training and evaluation](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/02_train_evaluate.ipynb) ·
 [03 inference](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/03_inference.ipynb)
@@ -230,6 +230,7 @@ print(predict("Өте жақсы қосымша, маған ұнады"))
 ```
 
 **Web demo:** https://huggingface.co/spaces/karlygaw/KazProSpace (Gradio on a free ZeroGPU Space, the first request after a pause can take about a minute).
+<img width="955" height="388" alt="image" src="https://github.com/user-attachments/assets/6f294d16-6ec4-4a28-a7fe-e1b60c994d0a" />
 
 ## AI assistance and my contribution
 
