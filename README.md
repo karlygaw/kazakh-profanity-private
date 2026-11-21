@@ -234,7 +234,7 @@ print(predict("Өте жақсы қосымша, маған ұнады"))
 
 ## AI assistance and my contribution
 
-I used ChatGPT, Gemini, Claude (Anthropic) as an assistant: it helped plan the project, draft the lexicon, the code of the notebooks and this README, and explained the methods. My own contribution: choosing the data source and the domains, defining the labeling rules as a native speaker (what counts as profanity, how to treat Russian obscenities, masked words, short and stretched forms, mild insults), checking the lexicon roots and their false matches on the data, the manual audit of the labels and the reading of negative reviews, deciding what to include and exclude, running and checking all experiments, selecting the threshold, and analysing the errors. I can explain and modify the code.
+I used ChatGPT, Gemini, Claude (Anthropic) as an assistant. My own contribution: choosing the data source and the domains, defining the labeling rules as a native speaker (what counts as profanity, how to treat Russian obscenities, masked words, short and stretched forms, mild insults), checking the lexicon roots and their false matches on the data, the manual audit of the labels and the reading of negative reviews, deciding what to include and exclude, running and checking all experiments, selecting the threshold, and analysing the errors.
 
 ## Acknowledgements and licenses
 
