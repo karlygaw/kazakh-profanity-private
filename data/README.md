@@ -12,4 +12,4 @@
 | `rating` | original 1-5 star rating (sentiment, not the profanity label) |
 | `is_synthetic` | always 0: there are no synthetic examples |
 
-To rebuild the texts, get access to [`issai/kazsandra`](https://huggingface.co/datasets/issai/kazsandra) and run `notebooks/01_data_preparation.ipynb`.
+To rebuild the texts, get access to [`issai/kazsandra`](https://huggingface.co/datasets/issai/kazsandra) and run `01_data_preparation.ipynb`.
