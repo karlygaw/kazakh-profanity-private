@@ -2,7 +2,7 @@
 
 Binary classifier that reads one Kazakh product/app review (or any short comment) and predicts whether it contains **Kazakh profanity**: `0` = no profanity, `1` = profanity present. A fine-tuned **XLM-RoBERTa-base** outputs a label and the probability of the profanity class.
 
-**Author:** Karlygash Ussen · KBTU, DSSC5113 Algorithms of Computer Vision, bonus project (individual work)
+**Author:** Karlygash Ussen · KBTU, Algorithms of Computer Vision, bonus project (individual work)
 
 | | |
 |---|---|
@@ -11,9 +11,9 @@ Binary classifier that reads one Kazakh product/app review (or any short comment
 | Dataset source | [`issai/kazsandra`](https://huggingface.co/datasets/issai/kazsandra) (gated, CC BY 4.0) |
 
 Notebooks (open in Colab):
-[01 data preparation](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/notebooks/01_data_preparation.ipynb) ·
-[02 training and evaluation](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/notebooks/02_train_evaluate.ipynb) ·
-[03 inference](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/notebooks/03_inference.ipynb)
+[01 data preparation](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/01_data_preparation.ipynb) ·
+[02 training and evaluation](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/02_train_evaluate.ipynb) ·
+[03 inference](https://colab.research.google.com/github/karlygaw/kazakh-profanity-detection/blob/main/03_inference.ipynb)
 
 ## Results at a glance
 
@@ -30,11 +30,11 @@ Confusion matrix (rows = true, columns = predicted): TN 648, FP 18, FN 24, TP 30
 ## Repository structure
 
 ```
-notebooks/01_data_preparation.ipynb   build the dataset and the train/val/test splits
-notebooks/02_train_evaluate.ipynb     fine-tune, choose the threshold, evaluate once on the test set
-notebooks/03_inference.ipynb          load the saved model and classify new comments (no training, no data)
-data/split_ids.csv                    id, split and labels of every example (no review text)
-results/                              test_metrics.json, confusion_matrix.png, test_predictions.csv
+01_data_preparation.ipynb   build the dataset and the train/val/test splits
+02_train_evaluate.ipynb     fine-tune, choose the threshold, evaluate once on the test set
+03_inference.ipynb          load the saved model and classify new comments (no training, no data)
+data/split_ids.csv          id, split and labels of every example (no review text)
+results/                    test_metrics.json, confusion_matrix.png, test_predictions.csv
 requirements.txt
 ```
 
@@ -233,7 +233,7 @@ print(predict("Өте жақсы қосымша, маған ұнады"))
 
 ## AI assistance and my contribution
 
-I used Claude (Anthropic) as an assistant: it helped plan the project, draft the lexicon, the code of the notebooks and this README, and explained the methods. My own contribution: choosing the data source and the domains, defining the labeling rules as a native speaker (what counts as profanity, how to treat Russian obscenities, masked words, short and stretched forms, mild insults), checking the lexicon roots and their false matches on the data, the manual audit of the labels and the reading of negative reviews, deciding what to include and exclude, running and checking all experiments, selecting the threshold, and analysing the errors. I can explain and modify every part of the code.
+I used ChatGPT, Gemini, Claude (Anthropic) as an assistant: it helped plan the project, draft the lexicon, the code of the notebooks and this README, and explained the methods. My own contribution: choosing the data source and the domains, defining the labeling rules as a native speaker (what counts as profanity, how to treat Russian obscenities, masked words, short and stretched forms, mild insults), checking the lexicon roots and their false matches on the data, the manual audit of the labels and the reading of negative reviews, deciding what to include and exclude, running and checking all experiments, selecting the threshold, and analysing the errors. I can explain and modify the code.
 
 ## Acknowledgements and licenses
 
