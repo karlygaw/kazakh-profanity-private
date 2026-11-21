@@ -1,0 +1,17 @@
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Model weights and local artifacts live on the Hugging Face Hub / Google Drive, not in git
+*.safetensors
+*.bin
+*.pt
+artifacts/
+
+# Never commit credentials or raw (gated) review texts
+.env
+*token*
+train.csv
+val.csv
+test.csv
